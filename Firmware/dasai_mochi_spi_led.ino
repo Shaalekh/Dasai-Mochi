@@ -43,10 +43,10 @@ void setup() {
 
 void loop() {
   digitalWrite(PIN_LED, HIGH);
-  drawStatus("LED: ON", "OLED should show text");
+  drawStatus("LED: ON", "Status: Running");
   delay(500);
 
   digitalWrite(PIN_LED, LOW);
-  drawStatus("LED: OFF", "OLED should show text");
+  drawStatus("LED: OFF", "Status: Running");
   delay(500);
 }
