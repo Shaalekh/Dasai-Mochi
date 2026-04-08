@@ -10,6 +10,7 @@
 #define PIN_DC   6   // SPI Data/Command
 #define TOUCH_PIN 9
 #define SPEAKER_PIN 8
+#define BUZZER_CHANNEL 0
 #define I2S_DOUT 2   
 #define I2S_BCLK 0   
 #define I2S_LRC  1 
@@ -12880,6 +12881,9 @@ void playAnimation(const unsigned char** frames, int frameCount, int &currentFra
 
 void setup(void) {
 	pinMode(TOUCH_PIN, INPUT);
+
+	ledcSetup(BUZZER_CHANNEL, 2000, 8);
+	ledcAttachPin(SPEAKER_PIN, BUZZER_CHANNEL);
 
 	SPI.begin(PIN_CLK, -1, PIN_MOSI, PIN_CS);
   u8g2.begin();
