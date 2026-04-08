@@ -5,9 +5,10 @@
 
 // ================= PINS =================
 #define PIN_CLK  4   // SPI Clock (SCK)
-#define PIN_MOSI 5   // SPI Data (MOSI)
+#define PIN_MOSI 6   // SPI Data (MOSI)
 #define PIN_CS   7   // SPI Chip Select
-#define PIN_DC   6   // SPI Data/Command
+#define PIN_DC   5   // SPI Data/Command
+#define PIN_RESET 3  // OLED Reset
 #define TOUCH_PIN 9
 #define SPEAKER_PIN 8
 #define BUZZER_CHANNEL 0
@@ -20,7 +21,7 @@ U8G2_SH1106_128X64_NONAME_F_4W_HW_SPI u8g2(
   U8G2_R0,
   PIN_CS,
   PIN_DC,
-  U8X8_PIN_NONE
+  PIN_RESET
 );
 
 void setupI2S() {
@@ -12907,4 +12908,3 @@ void loop() {
 
   wasTouched = touched;
 }
-
