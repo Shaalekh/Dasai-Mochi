@@ -1,11 +1,13 @@
 #include <Arduino.h>
-#include <U8g2lib.h> 
-#include <Wire.h> 
+#include <U8g2lib.h>
+#include <SPI.h>
 #include <driver/i2s.h>
 
 // ================= PINS =================
-#define PIN_SDA 4
-#define PIN_SCL 5
+#define PIN_CLK  4   // SPI Clock (SCK)
+#define PIN_MOSI 5   // SPI Data (MOSI)
+#define PIN_CS   7   // SPI Chip Select
+#define PIN_DC   6   // SPI Data/Command
 #define TOUCH_PIN 9
 #define SPEAKER_PIN 8
 #define I2S_DOUT 2   
@@ -13,11 +15,11 @@
 #define I2S_LRC  1 
 
 
-U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(
+U8G2_SH1106_128X64_NONAME_F_4W_HW_SPI u8g2(
   U8G2_R0,
-  U8X8_PIN_NONE,
-  PIN_SCL,
-  PIN_SDA
+  PIN_CS,
+  PIN_DC,
+  U8X8_PIN_NONE
 );
 
 void setupI2S() {
@@ -12879,7 +12881,7 @@ void playAnimation(const unsigned char** frames, int frameCount, int &currentFra
 void setup(void) {
 	pinMode(TOUCH_PIN, INPUT);
 
-	Wire.begin(PIN_SDA, PIN_SCL);
+	SPI.begin(PIN_CLK, -1, PIN_MOSI, PIN_CS);
   u8g2.begin();
 	setupI2S();
 }
