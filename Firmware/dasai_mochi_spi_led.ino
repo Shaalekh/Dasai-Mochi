@@ -14,6 +14,7 @@
 #endif
 
 const uint8_t PIN_LED = LED_BUILTIN;
+const unsigned int BLINK_INTERVAL_MS = 500;
 
 U8G2_SH1106_128X64_NONAME_F_4W_HW_SPI u8g2(
   U8G2_R0,
@@ -35,7 +36,7 @@ void setup() {
   pinMode(PIN_LED, OUTPUT);
   digitalWrite(PIN_LED, LOW);
 
-  SPI.begin(PIN_CLK, -1, PIN_MOSI, PIN_CS);
+  SPI.begin(PIN_CLK, -1, PIN_MOSI, -1);
   u8g2.begin();
 
   drawStatus("OLED init OK", "LED blink test");
@@ -44,9 +45,9 @@ void setup() {
 void loop() {
   digitalWrite(PIN_LED, HIGH);
   drawStatus("LED: ON", "Status: Running");
-  delay(500);
+  delay(BLINK_INTERVAL_MS);
 
   digitalWrite(PIN_LED, LOW);
   drawStatus("LED: OFF", "Status: Running");
-  delay(500);
+  delay(BLINK_INTERVAL_MS);
 }
